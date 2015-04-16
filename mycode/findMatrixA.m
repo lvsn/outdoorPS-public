@@ -9,7 +9,7 @@ function [matrixA, validDay] = findMatrixA(matA,lightDb,lightInd,d)
 % output:
 %   'matrixA' is the constructed matrixA
 %
-% TODO: DO WE NEED TO KEEP THIS FUNCTION? We do not have the intervalData
+% TODO: Delete this function later.
 % This code is used in ICCP15-outdoorPS.
 % ----------
 %
@@ -47,7 +47,6 @@ matrixA.fullSphere = meanLightStructAllday.fullSphere(ind_interval,:,:);
 matrixA.b_ground = meanLightStructAllday.b_ground(ind_interval,:);
 matrixA.normal = meanLightStructAllday.normal;
 
-matrixA.condNums = condNum;
 matrixA.info = meanLightStructAllday.info;
 matrixA.info.index = ind_interval;
 matrixA.text = 'by interval';
