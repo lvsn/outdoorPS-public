@@ -1,15 +1,16 @@
 % main function to compute and display the sphere for ICCP15-outdoorPS
 %
-
-% TODO:
+% TODO: Build the illumination from the pre-computed matA.
+%       More jobs? (fig. 3 will be shown in this script)
+% -----------
+%
 
 % locate the sky images
-
 databasePath = '/home-local/yahog.extra.nobkp/www/pictures/master/skycam';
 % databasePath = '/home/jacen/laval/lvsn'
 
-% which day will be analysed (numerical)
-dateValue = '20141108'; % 20141108
+% which day will be analysed
+dateValue = '20141108'; % '20141108'
 
 % list the raw data
 X = getfilenames(fullfile(databasePath,dateValue),'envmap.exr',1,1);
@@ -57,6 +58,8 @@ matA.info.imageSize = MAPSIZE;
 % resultFilename = fullfile(resultbasePath, sprintf('%s_matA.mat',dateValue));
 % save(resultFilename,'matA');
 
+% TODO: We do not have the interval data, try to replace the function
+% findMatrixA.m by a simpler method.
 % load time interval data
 interval = 6;
 load(sprintf('data/intervalData/data_%d.mat',interval));
