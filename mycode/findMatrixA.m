@@ -9,6 +9,7 @@ function [matrixA, validDay] = findMatrixA(matA,lightDb,lightInd,d)
 % output:
 %   'matrixA' is the constructed matrixA
 %
+% TODO: DO WE NEED TO KEEP THIS FUNCTION? We do not have the intervalData
 % This code is used in ICCP15-outdoorPS.
 % ----------
 %
