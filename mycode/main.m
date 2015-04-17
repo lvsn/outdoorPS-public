@@ -1,5 +1,7 @@
 % main function to compute and display the sphere for ICCP15-outdoorPS
 %
+% To use this code, please specify the 'databasePath' and 'dateValue'
+%
 % TODO: More jobs? (fig. 3 will be shown in this script)
 % -----------
 %
@@ -79,8 +81,4 @@ c = computeAllConfidenceIntervals(matA.fullSphere, ...
     matA.normal.normal_fullSphere, noise);
 
 displayConfidenceIntervals(c);
-
-
-
-
 
