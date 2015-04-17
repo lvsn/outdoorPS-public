@@ -7,10 +7,10 @@
 
 % locate the sky images
 databasePath = '/home-local/yahog.extra.nobkp/www/pictures/master/skycam';
-% databasePath = '/home/jacen/laval/lvsn'
+% databasePath = '/home/jacen/laval'
 
 % which day will be analysed
-dateValue = '20141108'; % '20141108'
+dateValue = '20141108'; % '20141108','20141011'
 
 % list the raw data
 X = getfilenames(fullfile(databasePath,dateValue),'envmap.exr',1,1);
@@ -27,33 +27,39 @@ MAPSIZE = 256;
 
 % preparing for computing
 nIms = size(X,2); 
-time_interval_a = '10:30:00';
-time_interval_b = '16:30:00';
+time_interval_a = '10:48:00';
+time_interval_b = '16:51:00';
 r = 0;
 
 assert(nIms > 0, 'No environment map in the specified folder');
 disp('Computing the mean light vectors for a day');
 
 for i_x = 1:nIms
-    if mod(i_x,10)==1 && nIms > 30
-        fprintf('  computing mean light vector for EnvMap: %d in %d\n', i_x,nIms);
-    end
-
+    envmap_filename = X{i_x};
+    
     % choose the image base on time interval
-    if datestr(datenum(datestr(e.dateNumber,'HHMMSS'),'HHMMSS') - datenum(time_interval_a,'HH:MM:SS'),'HHMMSS') <=0 || ...
-       datestr(datenum(datestr(e.dateNumber,'HHMMSS'),'HHMMSS') - datenum(time_interval_b,'HH:MM:SS'),'HHMMSS') >=0 
-        continue;
+    xmlInfo = load_xml(strrep(envmap_filename,'envmap.exr','envmap.meta.xml'));
+    if isfield(xmlInfo, 'date')
+        date = xmlInfo.date;
+        envmap_time = datenum(date.year, date.month, date.day, date.hour, date.minute, date.second);
     end
     
+    if envmap_time - datenum(strcat(dateValue,time_interval_a),'yyyymmddHH:MM:SS') <=0 || ...
+       envmap_time - datenum(strcat(dateValue,time_interval_b),'yyyymmddHH:MM:SS') >=0 
+       continue;
+    end
+    
+    r = r + 1;
+    fprintf('  computing mean light vector for EnvMap: %s\n', datestr(envmap_time,'HH:MM:SS'));
+    
     % load the environment map
-	e = EnvironmentMap(X{i_x});
+	e = EnvironmentMap(envmap_filename);
 	e = imresize(e, [MAPSIZE, MAPSIZE]);
 
     % compute the mean light vector
     [matA_fullSphere,b_ground] = findAi(e, normal_fullSphere);
     
-    % save the result to a structure
-    r = r + 1;
+    % save the result to a structure    
     matA.fullSphere(r,:,:) = matA_fullSphere;
     matA.b_ground(r,:,:) = b_ground(1,1,:);
 end
@@ -65,7 +71,7 @@ matA.info.dateValue = dateValue;
 matA.info.imageSize = MAPSIZE;
 
 % save the structure
-% resultFilename = fullfile(resultbasePath, sprintf('%s_matA.mat',dateValue));
+% resultFilename = sprintf('%s_matA.mat',dateValue);
 % save(resultFilename,'matA');
 
 % compute the confidence interval
