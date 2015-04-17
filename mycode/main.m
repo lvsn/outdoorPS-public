@@ -1,7 +1,6 @@
 % main function to compute and display the sphere for ICCP15-outdoorPS
 %
-% TODO: Build the illumination from the pre-computed matA.
-%       More jobs? (fig. 3 will be shown in this script)
+% TODO: More jobs? (fig. 3 will be shown in this script)
 % -----------
 %
 
