@@ -4,7 +4,7 @@ Yannick Hold-Geoffroy, Jinsong Zhang, Paulo F. U. Gotardo, and Jean-François La
 
 which calculate and show the confidence intervals from a set of HDR environment maps captured throughout a day. 
 
-Project webpage: http://vision.gel.ulaval.ca/~̃jflalonde/projects/outdoorPS/ 
+Project webpage: http://vision.gel.ulaval.ca/~jflalonde/projects/outdoorPS/ 
 
 Getting started
 ===============
