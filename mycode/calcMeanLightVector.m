@@ -1,4 +1,4 @@
-function [IntensVecs, b_ground] = findAi(envmap,normal)
+function [IntensVecs, b_ground] = calcMeanLightVector(envmap,normal)
 % Computes the mean light vector for normal(s)
 %
 %   'normal' must be 3xN
