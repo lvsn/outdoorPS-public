@@ -30,6 +30,8 @@ Requirements
 Requires the following software package (available on github):
 
 * [utils](http://www.github.com/jflalonde/utils);
+* [hdrutils](http://www.github.com/jflalonde/hdrutils);
+* [envMapConversions](http://www.github.com/jflalonde/envMapConversions);
 
 Also requires the following 3rd-party functions (included):
 
