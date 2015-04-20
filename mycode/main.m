@@ -2,13 +2,12 @@
 %
 % To use this code, please specify the 'databasePath' and 'dateValue'
 %
-% TODO: More jobs? (fig. 3 will be shown in this script)
 % -----------
 %
-
+setpath;
 % locate the sky images
-databasePath = '/home-local/yahog.extra.nobkp/www/pictures/master/skycam';
-% databasePath = '/home/jacen/laval'
+% databasePath = '/home-local/yahog.extra.nobkp/www/pictures/master/skycam';
+databasePath = '/home/jacen/laval';
 
 % which day will be analysed
 dateValue = '20141108'; % '20141108','20141011'
@@ -28,8 +27,8 @@ MAPSIZE = 256;
 
 % preparing for computing
 nIms = size(X,2); 
-time_interval_a = '10:48:00';
-time_interval_b = '16:51:00';
+time_interval_a = '10:30:00';
+time_interval_b = '16:30:00';
 r = 0;
 
 assert(nIms > 0, 'No environment map in the specified folder');
@@ -58,7 +57,7 @@ for i_x = 1:nIms
 	e = imresize(e, [MAPSIZE, MAPSIZE]);
 
     % compute the mean light vector
-    [matA_fullSphere,b_ground] = findAi(e, normal_fullSphere);
+    [matA_fullSphere,b_ground] = calcMeanLightVector(e, normal_fullSphere);
     
     % save the result to a structure    
     matA.fullSphere(r,:,:) = matA_fullSphere;
