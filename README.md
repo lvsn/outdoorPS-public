@@ -13,11 +13,11 @@ Getting started
 
 Run the `main.m` script in `mycode`.
 
-Make sure you have the environments maps and set the `datebasePath` flag to where the images located.
+Make sure you have the environments maps and set the `datebasePath` variable to where the images are located.
 
 Running the code on your own images:
 
-All you have to do is to specify `datebasePath` and `dateValue` it will automatic compute the confidence intervals for your data. 
+All you have to do is to specify `datebasePath` and `dateValue`. The code will automatic compute the confidence intervals for your data. 
 
 Dataset
 ===========
