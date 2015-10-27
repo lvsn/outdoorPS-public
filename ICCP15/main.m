@@ -6,8 +6,7 @@
 %
 setpath;
 % locate the sky images
-% databasePath = '/home-local/yahog.extra.nobkp/www/pictures/master/skycam';
-databasePath = '/home/jacen/laval';
+databasePath = '/home/username/path/to/database';
 
 % which day will be analysed
 dateValue = '20141108'; % '20141108','20141011'
