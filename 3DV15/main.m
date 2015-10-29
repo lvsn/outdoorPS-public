@@ -19,10 +19,12 @@ dateValue = '20131106';
 
 % which plots to generate
 doPlotHemisphereMLVs = true;
-doPlotMaxUncertaintySphere = false;
+doPlotMaxUncertaintySphere = true;
 doPlotGainIntervals = true;
 doPlotSunIntensity = true;
 
+global envmap_format;
+envmap_format = 'Angular';
 
 parseVarargin(varargin{:});
 
@@ -69,7 +71,7 @@ end
 
 
 if doPlotMaxUncertaintySphere
-    
+    plotSphereMaxGain('matA', matA);
 end
 
 if doPlotGainIntervals
@@ -85,7 +87,8 @@ end
 
 
 function [matA] = computeMatA(X, normal_fullSphere, MAPSIZE, dateValue, sphereSize)
-
+    global envmap_format;
+    
     r = 1; nIms = size(X,2); datetimes = []; sunXYZs = [];
     
     assert(nIms > 0, 'No environment map in the specified folder');
@@ -95,7 +98,15 @@ function [matA] = computeMatA(X, normal_fullSphere, MAPSIZE, dateValue, sphereSi
         envmap_filename = X{i_x};
         
         % load the environment map
-        e = EnvironmentMap(envmap_filename, 'Angular');
+        try
+            e = EnvironmentMap(envmap_filename);
+        catch err
+            if strcmp(err.message, 'Metadata file not found. Must specify format')
+                e = EnvironmentMap(envmap_filename, envmap_format);
+            else
+                rethrow(err);
+            end
+        end
         e = imresize(e, [MAPSIZE, MAPSIZE]);
 
         % select image in the time interval

@@ -28,6 +28,8 @@ doPlotGains = true;
 
 parseVarargin(varargin{:});
 
+assert(~isempty(matA), 'this function requires a values for `matA`.');
+
 dateNums = matA.info.datetimes;
 
 % normalsx3xdatenums
