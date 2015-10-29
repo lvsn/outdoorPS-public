@@ -3,7 +3,7 @@
 % To use this code, please specify the 'databasePath' and 'dateValue'
 %
 % For example, invoke with:
-% main('databasePath', '/home/user/envmaps/', 'dateValue', '20141031');
+% main('databasePath', '/home/user/envmaps/', 'dateValue', '20141003');
 %
 % -----------
 %
@@ -15,7 +15,7 @@ setpath;
 databasePath = '/home/username/path/to/database';
 
 % which day will be analysed
-dateValue = '20131106';
+dateValue = '20141003';
 
 % which plots to generate
 doPlotHemisphereMLVs = true;
