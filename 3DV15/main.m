@@ -2,6 +2,9 @@
 %
 % To use this code, please specify the 'databasePath' and 'dateValue'
 %
+% For example, invoke with:
+% main('databasePath', '/home/user/envmaps/', 'dateValue', '20141031');
+%
 % -----------
 %
 
@@ -47,9 +50,11 @@ if doPlotHemisphereMLVs
 
     % normals bo be drawn in the sphere
     %a = (90:-1:-90)'; N0 = [ 0*a sind(a) -cosd(a) ]; % from Zenith to Nadir
-    N0 = [sph2cart(90  / 180 * pi, 45  / 180 * pi, 1);
-          sph2cart(135 / 180 * pi, 0   / 180 * pi, 1);
-          sph2cart(90  / 180 * pi, -45 / 180 * pi, 1)]; % values of fig.3 in 3DV15
+    DEG90 = 90  / 180 * pi; DEG45 = 45  / 180 * pi;
+    [a1x, a1y, a1z] = sph2cart(DEG90, -DEG45, 1);
+    [a2x, a2y, a2z] = sph2cart(0, -DEG45, 1);
+    [a3x, a3y, a3z] = sph2cart(-DEG90, -DEG45, 1);
+    N0 = [a1x a1y a1z; a2x a2y a2z; a3x a3y a3z]; % values of fig.3 in 3DV15
 
     mm = 0.1375; % scale the intensity
 
@@ -57,7 +62,7 @@ if doPlotHemisphereMLVs
         n0 = N0(i,:);
         [~,id] = max( N' * n0(:) );
         Ln = MLVs(:,:,id);
-        figure(200+i);
+        figure(400+i);
         plotHemisphereMLVs(Ln./mm, n0, 'DISP_ANGLES', 0); drawnow;
     end
 end
