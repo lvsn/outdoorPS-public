@@ -1,5 +1,34 @@
-function [] = plotHemisphereMLVs( L, n0, varargin )
-%function [] = plotHemisphereMLVs( L, n0, varargin )
+function [] = plotHemisphereMLVs( varargin )
+% Plot the mean light vectors for some normals
+%
+matA = [];
+
+parseVarargin(varargin{:});
+
+MLVs = matA.MLVs;
+N = matA.normal;
+
+% normals bo be drawn on the sphere
+%a = (90:-1:-90)'; N0 = [ 0*a sind(a) -cosd(a) ]; % from Zenith to Nadir
+DEG90 = 90  / 180 * pi; DEG45 = 45  / 180 * pi;
+[a1x, a1y, a1z] = sph2cart(DEG90, -DEG45, 1);
+[a2x, a2y, a2z] = sph2cart(0, -DEG45, 1);
+[a3x, a3y, a3z] = sph2cart(-DEG90, -DEG45, 1);
+N0 = [a1x a1y a1z; a2x a2y a2z; a3x a3y a3z]; % values of fig.3 in 3DV15
+
+mm = 0.1375; % scale the intensity
+
+for i = 1:size(N0,1)
+    n0 = N0(i,:);
+    [~,id] = max( N' * n0(:) );
+    Ln = MLVs(:,:,id);
+    figure(400+i);
+    plotHemisphereMLV(Ln./mm, n0, 'DISP_ANGLES', 0); drawnow;
+end
+    
+
+function [] = plotHemisphereMLV( L, n0, varargin )
+%function [] = plotHemisphereMLV( L, n0, varargin )
 %
 % L is mx3 MLVs matrix
 
