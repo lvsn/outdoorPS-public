@@ -1,8 +1,14 @@
-% add the 3rd_party
-sdir = fileparts(fileparts(mfilename('fullpath')));
+% Get current file directory
+global projectRootPath;
+projectRootPath = mfilename('fullpath');
+
+sdir = fileparts(fileparts(projectRootPath));
+
+% Add included dependencies to path
 addpath(genpath(fullfile(sdir, '3rd_party')));
 addpath(genpath(fullfile(sdir, 'common')));
 
+% Search or add external dependencies
 a = strfind(path, '/utils/mycode');
 if isempty(strfind(path, '/utils/mycode'))
     rdir = fullfile(fileparts(sdir), 'utils');
