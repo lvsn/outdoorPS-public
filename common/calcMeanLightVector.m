@@ -1,4 +1,4 @@
-function [IntensVecs, b_ground] = calcMeanLightVector(envmap,normal)
+function IntensVecs = calcMeanLightVector(envmap,normal)
 % Computes the mean light vector for normal(s)
 %
 %   'normal' must be 3xN
@@ -9,30 +9,10 @@ function [IntensVecs, b_ground] = calcMeanLightVector(envmap,normal)
 % ----------
 %
 
-groundAlbedo = 0.15; % used in our paper
-
-%% render the ground
-ground_normal = reshape([0,1,0],1,1,3);
-b_ground = renderGround(envmap,ground_normal);
-
-% consider the solidAngle
-b_ground = b_ground .* 2; % b_ground = b_ground .* (2 * pi)/pi;
-
-% scale by albedo
-b_ground = b_ground .* groundAlbedo;
+groundAlbedo = [ 0.148077 0.150000 0.151923 ]'; % used in our paper
+envmapWithGround = fillGroundAlbedo(envmap, groundAlbedo);
 
 [xw,yw,zw,validInd] = envmap.worldCoordinates;
-
-% replace the ground by the rendered result
-B_ground = repmat(b_ground, [envmap.nrows, envmap.ncols]);
-
-% ground is where yw is pointing down
-indGround = (yw <= 0) & validInd;
-indGround = indGround(:,:,ones(1, envmap.nbands));
-
-newData = envmap.data;
-newData(indGround) = B_ground(indGround);
-envmapWithGround = EnvironmentMap(newData, envmap.format);
 
 %% compute the valid envmap region
 

@@ -56,11 +56,10 @@ for i_x = 1:nIms
 	e = imresize(e, [MAPSIZE, MAPSIZE]);
 
     % compute the mean light vector
-    [matA_fullSphere,b_ground] = calcMeanLightVector(e, normal_fullSphere);
+    matA_fullSphere = calcMeanLightVector(e, normal_fullSphere);
     
     % save the result to a structure    
     matA.fullSphere(r,:,:) = matA_fullSphere;
-    matA.b_ground(r,:,:) = b_ground(1,1,:);
 end
 
 % orginaze the result
