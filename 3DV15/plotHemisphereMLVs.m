@@ -43,7 +43,7 @@ OPTS_SKY = {'FaceLighting','phong','FaceColor',[20 200 250]/255,'EdgeColor',[0 1
 OPTS_HMS = {'FaceLighting','phong','FaceColor',[1 1 1]*.1,'EdgeColor','none'};
 OPTS_GND = {'FaceLighting','phong','FaceColor',[1 1 1]*.6,'EdgeColor',[1 1 1]*.4};
 
-FOPTS = {'FontName','Helveltica','FontSize',20,'FontWeight','bold'};
+FOPTS = {'FontName','Helvetica','FontSize',20,'FontWeight','bold'};
 
 %% (1) plot sky and ground hemispheres
 [X,Y,Z] = sphere(24); Z(Z<0) = NaN;

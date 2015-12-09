@@ -29,8 +29,10 @@ Getting started
 ===============
 
 1. Organize a sequence of environment maps in this folder hierarchy: YYYYMMDD/HHmmSS/envmap.exr . Ready-to-use examples are available on [hdrdb.com](http://hdrdb.com).
-2. Modify the `databasePath` and `dateValue` variables at the beginning of `main.m` according to your setup and needs.
-3. Run the `main.m` script.
+2. Execute the `setpath.m` script to add the included dependencies to your path.
+3. Run `main.m`:
+    1. For 3DV'15: execute the `main()` function with the `databasePath` and `dateValue` arguments, for example: `main('databasePath', '/home/user/envmaps/', 'dateValue', '20141003')`;
+    2. For ICCP'15: modify the `databasePath` and `dateValue` variables at the beginning of `main.m` according to your setup and needs.
 
 
 Dataset

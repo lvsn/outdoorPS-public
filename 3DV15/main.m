@@ -44,6 +44,7 @@ MAPSIZE = 256;
 
 matA = cacheFunction(@computeMatA, X, normal_fullSphere, MAPSIZE, dateValue, sphereSize);
 
+
 %% plot the hemisphere mean light vectors
 if doPlotHemisphereMLVs
     plotHemisphereMLVs('matA',matA); 
